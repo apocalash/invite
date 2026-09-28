@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hey you… 👀</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#c8102e;--blush:#fbdde2;--cream:#fff8f1;--burg:#4a0d1c;--card:#fffdfa;
+--serif:'Fraunces',Georgia,'Times New Roman',serif;--sans:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:var(--sans);color:var(--burg);background:radial-gradient(120% 80% at 50% 0%,var(--blush),var(--cream) 60%);overflow:hidden;
+padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+body::before{content:"";position:fixed;inset:0;opacity:.35;pointer-events:none;
+background-image:radial-gradient(rgba(200,16,46,.12) 1px,transparent 1.5px);background-size:22px 22px}
+#bg,#fx{position:fixed;inset:0;pointer-events:none}
+#fx{z-index:50;width:100%;height:100%}
+.f{position:absolute;bottom:-8vh;opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.5}100%{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+.doodle{position:fixed;font-size:26px;opacity:.5;pointer-events:none;animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+#app{position:relative;height:100%;display:grid;place-items:center;padding:24px 22px 64px}
+.scene{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 24px 72px;gap:14px;overflow-y:auto}
+.scene.on{display:flex;animation:sceneIn .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes sceneIn{from{opacity:0;transform:translateY(24px) scale(.97)}}
+h1,h2{font-family:var(--serif);font-weight:600;line-height:1.08;color:var(--burg);letter-spacing:-.01em}
+h1{font-size:clamp(40px,11vw,68px)}
+h2.big{font-size:clamp(38px,10.5vw,72px);max-width:12em}
+h2.big em{color:var(--red)}
+.line{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(23px,6vw,34px);max-width:15em;opacity:0;transform:translateY(16px);transition:.8s cubic-bezier(.2,.8,.2,1)}
+.line.show{opacity:1;transform:none}
+.sub{font-size:18px;opacity:.75;max-width:20em}
+.btns{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:12px}
+button{font:700 18px var(--sans);border:0;cursor:pointer;border-radius:999px;padding:16px 30px;min-height:54px;transition:transform .2s,box-shadow .2s;position:relative}
+button:focus-visible{outline:3px solid var(--burg);outline-offset:3px}
+.pri{background:linear-gradient(180deg,#e0243f,var(--red));color:#fff;box-shadow:0 10px 24px -8px rgba(200,16,46,.7),inset 0 1px 0 rgba(255,255,255,.35)}
+.pri:hover{transform:translateY(-3px) scale(1.04)}
+.pri:active{transform:scale(.96)}
+.pri.pulse{animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.06);box-shadow:0 14px 30px -6px rgba(200,16,46,.75)}}
+.sec{background:var(--card);color:var(--burg);box-shadow:0 0 0 2px var(--blush),0 6px 16px -8px rgba(74,13,28,.3)}
+.sec:active{transform:scale(.95)}
+.link{background:none;color:var(--burg);opacity:.6;font-weight:500;font-size:15px;text-decoration:underline;min-height:44px;padding:8px 12px}
+.hidden{display:none!important}
+.fade{opacity:0;transform:translateY(14px);transition:.8s cubic-bezier(.2,.8,.2,1)}
+.fade.show{opacity:1;transform:none}
+#yes{font-size:22px;padding:18px 40px;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+#no{transition:transform .25s ease}
+.card{background:var(--card);border-radius:28px;padding:24px 22px;width:min(360px,100%);box-shadow:0 22px 44px -22px rgba(74,13,28,.5),0 0 0 1px rgba(200,16,46,.08);text-align:left;position:relative;transform:rotate(-1deg)}
+.card::after{content:"💌";position:absolute;top:-16px;right:-8px;font-size:34px;transform:rotate(12deg)}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:2px dotted var(--blush)}
+.row:last-child{border:0}
+.row small{font-size:14px;font-weight:700;color:var(--red)}
+.row b{font-family:var(--serif);font-size:22px;font-weight:600;text-align:right}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:min(360px,100%)}
+.cd div{background:var(--burg);color:var(--cream);border-radius:18px;padding:12px 2px}
+.cd b{display:block;font-family:var(--serif);font-size:clamp(28px,8vw,40px);font-variant-numeric:tabular-nums}
+.cd span{font-size:11px;opacity:.75;letter-spacing:.06em}
+.dots{position:fixed;bottom:calc(46px + env(safe-area-inset-bottom));left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:5}
+.dots i{width:8px;height:8px;border-radius:9px;background:var(--blush);transition:.4s}
+.dots i.on{width:26px;background:var(--red)}
+footer{position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-size:13px;opacity:.6;z-index:5;cursor:default;user-select:none}
+#load{position:fixed;inset:0;z-index:99;background:var(--cream);display:grid;place-items:center;font-size:64px;transition:opacity .6s}
+#load span{animation:beat .9s ease-in-out infinite}
+@keyframes beat{30%{transform:scale(1.3)}60%{transform:scale(.95)}}
+.heart-pop{position:fixed;z-index:60;pointer-events:none;font-size:20px;animation:pop .9s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--x),var(--y)) scale(1.3);opacity:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01s!important}.f,.doodle{display:none}}
+</style>
+</head>
+<body>
+<div id="load"><span>💗</span></div>
+<div id="bg"></div>
+<div id="app">
+
+<section class="scene" id="s0">
+  <div class="line" data-t="800">Hey you… 👀</div>
+  <div class="line" data-t="1900">I made something for you.</div>
+  <div class="btns fade" data-t="3000"><button class="pri pulse" data-next>Okay, I’m curious →</button></div>
+</section>
+
+<section class="scene" id="s1">
+  <div class="line" data-t="2000">I’ve been meaning to ask you something.</div>
+  <div class="line" data-t="3900">I could’ve just sent you a text…</div>
+  <div class="line" data-t="5800">But apparently that wasn’t dramatic enough.</div>
+  <div class="line" data-t="7800">And you know i love being dramatic😉</div>
+  <div class="btns fade" data-t="10600"><button class="pri" data-next>Continue →</button></div>
+</section>
+
+<section class="scene" id="s2">
+  <div class="line" data-t="300"><span class="name"></span>Okay, no more stalling…</div>
+  <!-- <div class="line" data-t="2000">Okay, no more stalling…</div> -->
+  <div class="line" data-t="2000">There’s something I really want to ask you.</div>
+  <div class="line" data-t="4600" style="color:var(--red)">And I’m hoping you say yes (atleast this time please !!) 💗</div>
+  <div class="btns fade" data-t="6000"><button class="pri pulse" data-next>Ask me already →</button></div>
+</section>
+
+<section class="scene" id="s3">
+  <h2 class="big fade" data-t="200">Would you like to go on a date with me? <em>💕</em></h2>
+  <p class="sub fade" data-t="900">Like… an actual date. Just you and me.</p>
+  <div class="btns fade" data-t="1500" style="min-height:120px;position:relative">
+    <button class="pri" id="yes">YES 💕</button>
+    <button class="sec" id="no">NO 🙈</button>
+  </div>
+  <!-- <button class="link hidden" id="really">I really mean no</button> -->
+</section>
+
+<section class="scene" id="s4">
+  <h1 class="fade" data-t="200">IT’S A DATE! 🥹💕</h1>
+  <p class="line" data-t="1200" style="font-style:normal;font-family:var(--sans);font-size:20px">YAYY !!!!!.</p>
+  <p class="line" data-t="2400" style="font-style:normal;font-family:var(--sans);font-size:20px">Couldn't handle another No from you</p>
+  <div class="btns fade" data-t="3600"><button class="pri pulse" data-next>Show me the details →</button></div>
+</section>
+
+<section class="scene" id="s5">
+  <div class="card fade" data-t="100">
+    <div class="row"><small>DATE 💌</small><b id="d"></b></div>
+    <div class="row"><small>TIME ⏰</small><b id="t"></b></div>
+    <div class="row"><small>LOCATION 📍</small><b id="l"></b></div>
+    <div class="row"><small>PLANS 🤫</small><b id="p"></b></div>
+  </div>
+  <p class="sub fade" data-t="700" style="font-size:16px">The details are classified. (Cause you are deciding the itineary)😌</p>
+  <p class="line show fade" data-t="1000" style="font-size:20px">Our date is in…</p>
+  <div class="cd fade" data-t="1200"><div><b id="cd">00</b><span>DAYS</span></div><div><b id="ch">00</b><span>HOURS</span></div><div><b id="cm">00</b><span>MINUTES</span></div><div><b id="cs">00</b><span>SECONDS</span></div></div>
+  <h2 id="today" class="hidden" style="font-size:40px">TODAY’S THE DAY. 💕</h2>
+  <div class="btns fade" data-t="1600" style="flex-direction:column">
+    <button class="pri" id="cal">💗 Add to Google Calendar</button>
+    <button class="link" id="mine">I’ll remember it myself 😌</button>
+  </div>
+</section>
+
+<section class="scene" id="s6">
+  <h1>Okay ❤️</h1>
+  <p class="sub">Thank you for being honest and agreeing to be my Panjasara Mommyy!! </p>
+  <div class="btns"><button class="sec" id="again">Start over</button></div>
+</section>
+</div>
+
+<div class="dots" id="dots"></div>
+<footer id="foot">made with questionable amounts of sneham ❤️</footer>
+<canvas id="fx"></canvas>
+
+<script>
+/* ============ EDIT ME ============ */
+const dateConfig = {
+  senderName: "",
+  recipientName: "Peri Bear",
+  date: "2 October",
+  time: "10:00 AM",
+  location: "Hyderabad",
+  surpriseDescription: "Surprise! 🤫",
+  start: { year: 2026, month: 10, day: 2, hour: 10, minute: 0 }, // Asia/Kolkata
+  durationHours: 2,
+  calendarEventTitle: "A Very Important Date 💕",
+  calendarEventDescription: "It’s a date! 💕\nPlans: classified 🤫\nJust show up and trust me."
+};
+/* ================================= */
+
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const C = dateConfig, pad = n => String(n).padStart(2, '0');
+const scenes = $$('.scene'); let cur = -1, timers = [];
+
+// personalization (name used just twice: opening + scene 3)
+$('#s0 .line').innerHTML = `Hey ${C.recipientName}… 👀`;
+$('#s2 .name').textContent = '';
+$('#s2 .line').textContent = `Okay, no more stalling…`;
+document.title = `For ${C.recipientName} 💌`;
+$('#d').textContent = C.date; $('#t').textContent = C.time; $('#l').textContent = C.location; $('#p').textContent = C.surpriseDescription;
+$('#dots').innerHTML = '<i></i>'.repeat(6);
+
+// background hearts + doodles
+const bg = $('#bg');
+for (let i = 0; i < 14; i++) {
+  const s = document.createElement('span'); s.className = 'f';
+  s.textContent = ['💗', '✨', '🤍', '💕', '·'][i % 5];
+  s.style.cssText = `left:${Math.random() * 100}%;font-size:${14 + Math.random() * 20}px;animation-duration:${12 + Math.random() * 14}s;animation-delay:${-Math.random() * 20}s`;
+  bg.appendChild(s);
+}
+[['🍫', '6%', '12%'], ['🌹', '86%', '20%'], ['☕', '8%', '78%'], ['✉️', '84%', '74%']].forEach(([e, x, y], i) => {
+  const d = document.createElement('span'); d.className = 'doodle'; d.textContent = e;
+  d.style.cssText = `left:${x};top:${y};animation-delay:${i * .8}s`; bg.appendChild(d);
+});
+
+// scene engine
+function go(n) {
+  timers.forEach(clearTimeout); timers = [];
+  scenes.forEach(s => s.classList.remove('on'));
+  const s = scenes[n]; cur = n;
+  $$('.line,.fade', s).forEach(e => e.classList.remove('show'));
+  s.classList.add('on');
+  $$('#dots i').forEach((d, i) => d.classList.toggle('on', i === Math.min(n, 5)));
+  $$('.line,.fade', s).forEach(e => {
+    const t = reduce ? 0 : +(e.dataset.t || 0);
+    timers.push(setTimeout(() => e.classList.add('show'), t));
+  });
+  if (n === 5) tick();
+}
+document.addEventListener('click', e => { if (e.target.closest('[data-next]')) go(cur + 1); });
+
+// tiny hearts on every button press
+document.addEventListener('pointerdown', e => {
+  if (!e.target.closest('button') || reduce) return;
+  for (let i = 0; i < 5; i++) {
+    const h = document.createElement('span'); h.className = 'heart-pop'; h.textContent = ['💗', '💕', '✨'][i % 3];
+    h.style.left = e.clientX + 'px'; h.style.top = e.clientY + 'px';
+    h.style.setProperty('--x', (Math.random() * 90 - 45) + 'px'); h.style.setProperty('--y', -(30 + Math.random() * 60) + 'px');
+    document.body.appendChild(h); setTimeout(() => h.remove(), 900);
+  }
+});
+
+// confetti (tiny canvas implementation)
+const cv = $('#fx'), cx = cv.getContext('2d'); let parts = [], raf = 0;
+function size() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; }
+size(); addEventListener('resize', size);
+function burst(x, y, n = 90) {
+  if (reduce) return;
+  const cols = ['#c8102e', '#fbdde2', '#ff6b81', '#4a0d1c', '#ffd6a5', '#fff'];
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2, v = 5 + Math.random() * 11;
+    parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, r: 4 + Math.random() * 6, c: cols[i % 6], rot: Math.random() * 6, life: 1, heart: i % 4 === 0 });
+  }
+  if (!raf) loop();
+}
+function loop() {
+  cx.clearRect(0, 0, cv.width, cv.height);
+  parts = parts.filter(p => p.life > 0);
+  parts.forEach(p => {
+    p.vy += .25; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.rot += .15; p.life -= .006;
+    cx.save(); cx.globalAlpha = Math.max(p.life, 0); cx.translate(p.x * devicePixelRatio, p.y * devicePixelRatio); cx.rotate(p.rot);
+    cx.fillStyle = p.c;
+    if (p.heart) { cx.font = `${p.r * 3 * devicePixelRatio}px serif`; cx.fillText('♥', 0, 0); }
+    else cx.fillRect(-p.r, -p.r / 2, p.r * 2, p.r);
+    cx.restore();
+  });
+  raf = parts.length ? requestAnimationFrame(loop) : 0;
+  if (!raf) cx.clearRect(0, 0, cv.width, cv.height);
+}
+
+// the big question
+const noLines = ['Are you sure? 🥺', 'Think about it…', 'I can offer snacks. 🍫', 'This button seems suspicious 👀', 'Really? 😭', 'Okay okay…', 'Dont be dumb and just say Yes!', 'I will block you if u click No again!','We going out anyway!'];
+let noStep = 0;
+const yes = $('#yes'), no = $('#no');
+// function resetQ() { noStep = 0; no.textContent = 'NO 🙈'; no.style.transform = ''; yes.style.transform = ''; $('#really').classList.add('hidden'); }
+function resetQ() { noStep = 0; no.textContent = 'NO 🙈'; no.style.transform = ''; yes.style.transform = ''; }
+no.addEventListener('click', () => {
+  if (noStep >= noLines.length) { go(6); return; }
+  no.textContent = noLines[noStep]; noStep++;
+  yes.style.transform = `scale(${Math.min(1 + noStep * .1, 1.6)})`;
+  const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if (fine && noStep < 5) no.style.transform = `translate(${(Math.random() * 60 - 30)}px,${(Math.random() * 30 - 5)}px)`; // small dodge, never impossible
+});
+$('#again').addEventListener('click', () => { resetQ(); go(0); });
+yes.addEventListener('click', () => {
+  const r = yes.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+  yes.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(1)' }], { duration: 500 });
+  burst(x, y, 120);
+  setTimeout(() => { go(4); burst(innerWidth * .2, innerHeight * .4, 60); burst(innerWidth * .8, innerHeight * .4, 60); }, 700);
+});
+
+// countdown, target fixed to Asia/Kolkata (UTC+5:30)
+const S = C.start, target = Date.UTC(S.year, S.month - 1, S.day, S.hour - 5, S.minute - 30);
+let cdTimer;
+function tick() {
+  clearTimeout(cdTimer);
+  const ms = target - Date.now();
+  if (ms <= 0) { $('.cd').classList.add('hidden'); $('#today').classList.remove('hidden'); $('#s5 .line').classList.add('hidden'); return; }
+  const s = Math.floor(ms / 1000);
+  $('#cd').textContent = pad(Math.floor(s / 86400)); $('#ch').textContent = pad(Math.floor(s % 86400 / 3600));
+  $('#cm').textContent = pad(Math.floor(s % 3600 / 60)); $('#cs').textContent = pad(s % 60);
+  cdTimer = setTimeout(tick, 1000);
+}
+
+// Google Calendar link (no OAuth). Floating local time + ctz=Asia/Kolkata
+const fmt = (y, mo, d, h, mi) => `${y}${pad(mo)}${pad(d)}T${pad(h)}${pad(mi)}00`;
+function calUrl() {
+  const end = new Date(Date.UTC(S.year, S.month - 1, S.day, S.hour + C.durationHours, S.minute));
+  const p = new URLSearchParams({
+    action: 'TEMPLATE', text: C.calendarEventTitle,
+    dates: `${fmt(S.year, S.month, S.day, S.hour, S.minute)}/${fmt(end.getUTCFullYear(), end.getUTCMonth() + 1, end.getUTCDate(), end.getUTCHours(), end.getUTCMinutes())}`,
+    ctz: 'Asia/Kolkata', location: C.location, details: C.calendarEventDescription
+  });
+  return 'https://calendar.google.com/calendar/render?' + p.toString();
+}
+$('#cal').addEventListener('click', () => { burst(innerWidth / 2, innerHeight * .7, 40); window.open(calUrl(), '_blank', 'noopener'); });
+$('#mine').addEventListener('click', () => { $('#mine').textContent = 'Big trust. I love that. 💗'; burst(innerWidth / 2, innerHeight * .8, 50); });
+
+// easter egg: tap the footer 3 times
+let taps = 0;
+$('#foot').addEventListener('click', () => { if (++taps === 3) { taps = 0; for (let i = 0; i < 4; i++) setTimeout(() => burst(Math.random() * innerWidth, innerHeight * .3, 30), i * 250); } });
+
+// loading -> start
+setTimeout(() => { const l = $('#load'); l.style.opacity = 0; setTimeout(() => l.remove(), 600); go(0); }, reduce ? 100 : 1100);
+</script>
+</body>
+</html>
